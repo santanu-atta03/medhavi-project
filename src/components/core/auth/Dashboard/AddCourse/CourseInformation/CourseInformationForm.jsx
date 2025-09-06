@@ -162,11 +162,16 @@ const CourseInformationForm = () => {
 
   const addTag = () => {
   const newTag = input.trim().replace(/,$/, "").toLowerCase();
+
   if (newTag && !tags.includes(newTag)) {
-    setTags([...tags, newTag]);
+    const updatedTags = [...tags, newTag];
+    setTags(updatedTags);
     setInput("");
+    // Update form immediately with new tags
+    setValue("courseTags", updatedTags);
   }
 };
+
 
   return (
     <div className='mt-5  md:w-full'>
