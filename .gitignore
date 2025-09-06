@@ -7,19 +7,27 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# Build output
 dist
-.env
 dist-ssr
 *.local
 
-# Editor directories and files
+# Dependency directories
+node_modules
+
+# Environment variables
+**/.env      # Ignores .env files in all folders
+
+# IDEs and Editors
 .vscode/*
-!.vscode/extensions.json
+!.vscode/extensions.json   # Keep only extensions.json in .vscode
 .idea
 .DS_Store
+
+# Visual Studio project files
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
