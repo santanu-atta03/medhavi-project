@@ -56,7 +56,7 @@ export const categories = {
 
 // CATALOG PAGE DATA
 export const catalogData = {
-  CATALOGPAGEDATA_API: `${import.meta.env.VITE_BASE_URL}course/getCategoryPageDetails`,
+  CATALOGPAGEDATA_API: `${import.meta.env.VITE_BASE_URL}/course/getCategoryPageDetails`,
 }
 // CONTACT-US API
 export const contactusEndpoint = {
