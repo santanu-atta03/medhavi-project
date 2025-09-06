@@ -160,6 +160,14 @@ const CourseInformationForm = () => {
     }
   }
 
+  const addTag = () => {
+  const newTag = input.trim().replace(/,$/, "").toLowerCase();
+  if (newTag && !tags.includes(newTag)) {
+    setTags([...tags, newTag]);
+    setInput("");
+  }
+};
+
   return (
     <div className='mt-5  md:w-full'>
     <form className='border border-richblack-800 px-6 py-5 mt-5 rounded-md bg-richblack-800'
@@ -237,9 +245,17 @@ const CourseInformationForm = () => {
                 }
               }
             }}
+            onBlur={addTag}
             placeholder="Add a tag and press Enter"
             className="w-full mt-2 p-2 rounded bg-richblack-600 text-white"
           />
+          <button
+      type="button"
+      onClick={addTag}
+      className="bg-yellow-400 px-3 py-1 rounded text-white"
+    >
+      +
+    </button>
         </label>
 
         {/* Thumbnail Upload */}
