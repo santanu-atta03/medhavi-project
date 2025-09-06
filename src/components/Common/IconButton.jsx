@@ -1,0 +1,25 @@
+import React from 'react'
+
+const IconButton = ({text,onclick,children,disabled,outline = false,customClasses,type}) => {
+    return (
+        <button
+            disabled={disabled}
+            onClick={onclick}
+            className={`flex items-center justify-around ${
+            outline ? "border border-yellow-50 bg-transparent" : "bg-yellow-50"
+            } cursor-pointer gap-x-2 rounded-md py-2 px-4 font-semibold text-richblack-900 ${customClasses}`}
+            type={type}
+        >
+            {children ? (
+            <>
+                <span className={`${outline && "text-yellow-50"}`}>{text}</span>
+                {children}
+            </>
+            ) : (
+            text
+            )}
+        </button>
+    )
+}
+
+export default IconButton

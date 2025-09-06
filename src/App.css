@@ -1,0 +1,663 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #afb2bf;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 3px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #000814;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #afb2bf;
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+*:active::-webkit-scrollbar-thumb,
+*:focus::-webkit-scrollbar-thumb,
+*:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+/* Hide default styling of details/summary */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* https://10015.io/tools/css-loader-generator */
+.spinner {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 9px solid #f1f2ff;
+  animation: spinner-bulqg1 0.8s infinite linear alternate,
+    spinner-oaa3wk 1.6s infinite linear;
+}
+
+.codeblock1 {
+  width: 372.95px;
+  height: 257.05px;
+  border-radius: 100%;
+  left: calc(50% - 372.95px / 2 - 76.53px);
+  top: calc(50% - 257.05px / 2 - 47.47px);
+  background: linear-gradient(
+    123.77deg,
+    #8837d3 -6.46%,
+    #ffa500 59.04%,
+    #f8f8ff 124.53%
+  );
+  opacity: 0.2;
+  filter: blur(34px);
+  transform: matrix(1, 0, -0.03, 1, 0, 0);
+  
+}
+
+.codeblock2 {
+  position: absolute;
+  width: 372.95px;
+  height: 257.05px;
+  left: calc(50% - 372.95px / 2 - 76.53px);
+  top: calc(50% - 257.05px / 2 - 47.47px);
+  border-radius: 100%;
+  background: linear-gradient(
+    118.19deg,
+    #1fa2ff -3.62%,
+    #12d8fa 50.44%,
+    #a6ffcb 104.51%
+  );
+  opacity: 0.2;
+  filter: blur(34px);
+  transform: matrix(1, 0, -0.03, 1, 0, 0);
+}
+.code-border {
+  border: 2px solid;
+  border-image-slice: 1;
+  border-width: 2px;
+  border-image-source: linear-gradient(to right bottom, #ffffff38, #ffffff00);
+  background: linear-gradient(
+    111.93deg,
+    rgba(14, 26, 45, 0.24) -1.4%,
+    rgba(17, 30, 50, 0.38) 104.96%
+  );
+  /* backdrop-filter: blur(26px); */
+}
+.homepage_bg {
+  background: url("../src/assets/Images/bghome.svg");
+  /* background-size: contain; */
+}
+
+@keyframes spinner-bulqg1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+
+  12.5% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%
+    );
+  }
+
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      100% 100%,
+      100% 100%
+    );
+  }
+
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+
+  62.5% {
+    clip-path: polygon(
+      50% 50%,
+      100% 0,
+      100% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+
+  75% {
+    clip-path: polygon(
+      50% 50%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+}
+
+@keyframes spinner-oaa3wk {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
+}
+
+/* For conditional coloring of icons in dashboard sidebar */
+.active-icon {
+  fill: #ffd60a !important;
+  color: #ffd60a !important;
+}
+
+.inactive-icon {
+  fill: #838894;
+  color: #838894;
+}
+
+/* Buttons */
+.yellowButton {
+  @apply cursor-pointer rounded-md bg-yellow-50 px-[20px] py-[8px] font-semibold text-richblack-900;
+}
+
+/* Swiper CSS Starts */
+/* .swiper {
+  max-width: 1200px;
+  width: 91.66%;
+  height: 185px;
+  margin: 50px 0px;
+} */
+
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+}
+/* .swiper-slide {
+  @apply bg-richblack-800 text-richblack-25 p-3 text-[14px];
+} */
+/* Swiper CSS Ends */
+
+.blackButton {
+  @apply cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5;
+}
+.lable-style {
+  @apply text-[14px] text-richblack-5;
+}
+.form-style {
+  @apply rounded-lg bg-richblack-700 p-3 text-[16px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-400 focus:outline-none;
+}
+.section_heading {
+  @apply text-2xl font-bold text-richblack-5 lg:text-4xl;
+}
+
+.loader {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+  margin:15px auto;
+  position: relative;
+  color: #FFF;
+  left: -100px;
+  box-sizing: border-box;
+  animation: shadowRolling 2s linear infinite;
+}
+
+@keyframes shadowRolling {
+  0% {
+    box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+  12% {
+    box-shadow: 100px 0 white, 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+  25% {
+    box-shadow: 110px 0 white, 100px 0 white, 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+  36% {
+    box-shadow: 120px 0 white, 110px 0 white, 100px 0 white, 0px 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    box-shadow: 130px 0 white, 120px 0 white, 110px 0 white, 100px 0 white;
+  }
+  62% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 white, 120px 0 white, 110px 0 white;
+  }
+  75% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 white, 120px 0 white;
+  }
+  87% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 white;
+  }
+  100% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.form-style {
+  @apply rounded-lg bg-richblack-700 p-3 text-[16px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-400 focus:outline-none;
+}
+
+
+.animated-gradient-text {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  max-width: fit-content;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* border-radius: 1.25rem; */
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  transition: box-shadow 0.5s ease-out;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 300% 100%;
+  animation: gradient linear infinite;
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gradient-overlay::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: inherit;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #060010;
+  z-index: -1;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.text-content {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient linear infinite;
+}
+
+.modal-top .modal-dialog {
+  @apply mt-10 !important;
+}
+
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-top .modal-dialog {
+  animation: slideDown 0.3s ease-out;
+  margin-top: 10vh;
+}
+
+
+/* TagInput.css or inside a <style> block */
+
+.custom-tag-wrapper {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.custom-tag-wrapper .ReactTags__tags {
+  background-color: #2c2f36; /* richblack-600 */
+  border-radius: 0.5rem;
+  padding: 10px 30px;
+  color: #f1f1f1; /* richblack-5 */
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.18);
+}
+
+/* Optional: Tag style */
+.custom-tag-wrapper .ReactTags__tag {
+  background: #3a3f47;
+  color: #f1f1f1;
+  border-radius: 20px;
+  padding: 5px 10px;
+  margin-right: 6px;
+  font-size: 0.875rem;
+}
+
+/* Optional: Cross (×) button */
+.custom-tag-wrapper .ReactTags__remove {
+  margin-left: 8px;
+  cursor: pointer;
+  color: #f87171; /* red-400 */
+}
+
+@layer base {
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+
+/* From Uiverse.io by ArturCodeCraft */ 
+/* <reset-style> ============================ */
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+/* ============================ */
+/* <style for bg> ======== */
+.background {
+  /* border-radius: 16px;
+  border: 1px solid #1a1a1a; */
+  /* background: rgba(74, 74, 74, 0.39); */
+  mix-blend-mode: luminosity;
+  /* box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.20); */
+  /* backdrop-filter: blur(15px); */
+  width: 65px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* <style for menu__icon> ======== */
+.menu__icon {
+  width: 32px;
+  height: 32px;
+  padding: 2px;
+}
+
+.menu__icon span {
+  display: block;
+  width: 100%;
+  height: 0.125rem;
+  border-radius: 2px;
+  background-color: rgb(0, 122, 255);
+  box-shadow: 0 .5px 2px 0 hsla(0, 0%, 0%, .2);
+  transition: background-color .4s;
+  position: relative;
+}
+
+.menu__icon span+span {
+  margin-top: .375rem;
+}
+
+.menu__icon span:nth-child(1) {
+  animation: ease .8s menu-icon-top-2 forwards;
+}
+
+.menu__icon span:nth-child(2) {
+  animation: ease .8s menu-icon-scaled-2 forwards;
+}
+
+.menu__icon span:nth-child(3) {
+  animation: ease .8s menu-icon-bottom-2 forwards;
+}
+
+.menu__icon:hover span:nth-child(1) {
+  animation: ease .8s menu-icon-top forwards;
+}
+
+.menu__icon:hover span:nth-child(2) {
+  animation: ease .8s menu-icon-scaled forwards;
+}
+
+.menu__icon:hover span:nth-child(3) {
+  animation: ease .8s menu-icon-bottom forwards;
+  background-color: rgb(255, 59, 48);
+}
+
+@keyframes menu-icon-top {
+  0% {
+    top: 0;
+    transform: rotate(0);
+  }
+
+  50% {
+    top: .5rem;
+    transform: rotate(0);
+  }
+
+  100% {
+    top: .5rem;
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes menu-icon-top-2 {
+  0% {
+    top: .5rem;
+    transform: rotate(45deg);
+  }
+
+  50% {
+    top: .5rem;
+    transform: rotate(0);
+  }
+
+  100% {
+    top: 0;
+    transform: rotate(0);
+  }
+}
+
+@keyframes menu-icon-bottom {
+  0% {
+    bottom: 0;
+    transform: rotate(0);
+  }
+
+  50% {
+    bottom: .5rem;
+    transform: rotate(0);
+  }
+
+  100% {
+    bottom: .5rem;
+    transform: rotate(135deg);
+  }
+}
+
+@keyframes menu-icon-bottom-2 {
+  0% {
+    bottom: .5rem;
+    transform: rotate(135deg);
+  }
+
+  50% {
+    bottom: .5rem;
+    transform: rotate(0);
+  }
+
+  100% {
+    bottom: 0;
+    transform: rotate(0);
+  }
+}
+
+@keyframes menu-icon-scaled {
+  50% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes menu-icon-scaled-2 {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* From Uiverse.io by ArturCodeCraft */ 
+/* <reset-style> ============================ */
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+/* <main-style> ============================ */
+.swallow__icon {
+  width: 2rem;
+  height: 2rem;
+  padding: .25rem;
+  position: relative;
+}
+
+.swallow__icon span {
+  width: 1.5rem;
+  height: .563rem;
+  position: absolute;
+  top: calc(.25rem + .563rem - 1px);
+  left: calc(.25rem - 1px);
+  transition: transform 1s cubic-bezier(.86, 0, .07, 1),
+              transform-origin 1s cubic-bezier(.86, 0, .07, 1);
+
+}
+
+.swallow__icon span:before,
+.swallow__icon span:after {
+  content: "";
+  width: .75rem;
+  height: .125rem;
+  background-color: rgb(245, 245, 247);
+  position: absolute;
+  bottom: 0;
+  transition: transform 1s cubic-bezier(.86, 0, .07, 1),
+              transform-origin 1s cubic-bezier(.86, 0, .07, 1);
+}
+
+.swallow__icon span:before {
+  right: 50%;
+  border-radius: 2px 0 0 2px;
+  transform-origin: 100% 100%;
+  transform: rotate(40deg);
+}
+
+.swallow__icon span:after {
+  left: 50%;
+  border-radius: 0 2px 2px 0;
+  transform-origin: 0 100%;
+  transform: rotate(-40deg);
+}
+
+.swallow__icon:hover span {
+  transform: translateY(-8px);
+}
+
+.swallow__icon:hover span:before {
+  transform-origin: 100% 0;
+  transform: rotate(-40deg);
+}
+
+.swallow__icon:hover span:after {
+  transform-origin: 0 0;
+  transform: rotate(40deg);
+}
+

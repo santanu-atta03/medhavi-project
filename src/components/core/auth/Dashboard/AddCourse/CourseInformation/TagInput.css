@@ -1,0 +1,47 @@
+/* Wrap the whole section in a consistent layout */
+.custom-tag-wrapper .ReactTags__tags {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Tags container - row of tags */
+.custom-tag-wrapper .ReactTags__selected {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Each tag chip */
+.custom-tag-wrapper .ReactTags__tag {
+  background-color: #3a3f47;
+  color: #f1f1f1;
+  border-radius: 16px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+/* REMOVE button inside tag */
+.custom-tag-wrapper .ReactTags__remove {
+  margin-left: 6px;
+  color: #f87171;
+  cursor: pointer;
+}
+
+/* ⬇️ Input box styled separately */
+.custom-tag-wrapper .ReactTags__tagInput {
+  background-color: #2c2f36; /* richblack-600 */
+  padding: 10px 16px;
+  border-radius: 8px;
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.18);
+}
+
+.custom-tag-wrapper .ReactTags__tagInput input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f1f1f1;
+  width: 100%;
+  font-size: 1rem;
+}
