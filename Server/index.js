@@ -22,7 +22,7 @@ dbConnect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: "https://study-notion-project-27te.vercel.app",
   credentials: true, // if using cookies or auth headers
 }));
 
