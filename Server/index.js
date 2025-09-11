@@ -32,8 +32,7 @@ app.use(express.json());
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, "public")));
 app.use(cors({
-//   origin: "https://study-notion-project-27te.vercel.app",
-	origin : "https://medhavi-seven.vercel.app",
+	origin : "https://medhavi-pro.vercel.app/",
   credentials: true, // if using cookies or auth headers
 }));
 
