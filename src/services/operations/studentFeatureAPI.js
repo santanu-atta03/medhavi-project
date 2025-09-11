@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast";
 import { studentEndpoints } from "../apis";
 import { apiConnector } from "../apiconnector";
-import rzpLogo from "../../assets/Logo/rzp_logo.png"
+import rzpLogo from "../../assets/Logo/logo3.png"
 import.meta.env.VITE_RAZORPAY_KEY
 import {setPaymentLoading} from "../../slices/courseSlice"
 import {resetCart} from "../../slices/cartSlice"
@@ -55,7 +55,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
             currency: orderResponse.data.data.currency,
             amount: `${orderResponse.data.data.amount}`,
             order_id:orderResponse.data.data.id,
-            name:"StudyNotion",
+            name:"Medhavi",
             description: "Thank You for Purchasing the Course",
             image:rzpLogo,
             prefill: {

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import CountryCode from "../../../Data/countrycode.json"
+import { useDispatch } from 'react-redux';
+import { contactus } from '../../../services/operations/contactAPI';
 const ContactUsForm = () => {
     const [loading, setLoading] = useState(false);
 
-
+    const dispatch = useDispatch();
     const {
     register,
     handleSubmit,
@@ -16,8 +18,7 @@ const ContactUsForm = () => {
         console.log("Logging data : ", data);
         try{
             setLoading(true);
-            const response = {status : "OK"};
-            console.log("response : ", response);
+            dispatch(contactus(null, data))
             setLoading(false);
         }catch(err){
             console.log(err.message)
