@@ -238,6 +238,7 @@ exports.googleAuthCodeLogin = async (req, res) => {
     });
   }
 };
+
 exports.googleSignup = async (req, res) => {
   try {
     const { token, accountType } = req.body;
