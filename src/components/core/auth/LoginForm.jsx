@@ -36,7 +36,7 @@ function LoginForm() {
   };
 
   const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-const REDIRECT_URI = "http://localhost:5173/auth/google/callback"; 
+const REDIRECT_URI = "https://medhavi-pro.vercel.app/auth/google/callback"; 
 const SCOPE = "openid profile email";
 const RESPONSE_TYPE = "code";
 
