@@ -9,13 +9,13 @@ const { convertSecondsToDuration } = require("../utils/secToDuration")
 
 exports.createCourse = async(req, res)=> {
     try{
-        const {courseName, courseDescription, whatYouWillLearn, price, category, tag:_tag,status,instructions: _instructions,} = req.body;
+        const {courseName, courseDescription, whatYouWilLearn, price, category, tag:_tag,status,instructions: _instructions,} = req.body;
         const thumbnail = req.files.thumbnailImage;
 
         const tag = JSON.parse(_tag)
         const instructions = JSON.parse(_instructions)
 
-        if(!courseName || !courseDescription || !whatYouWillLearn || !price || !category || !tag){
+        if(!courseName || !courseDescription || !whatYouWilLearn || !price || !category || !tag){
             return res.status(400).json({
                 success : false,
                 message : "All fields are required"
@@ -47,7 +47,7 @@ exports.createCourse = async(req, res)=> {
             courseName,
             courseDescription,
             instructor : instructorDetails._id,
-            whatYouWilLearn : whatYouWillLearn ,
+            whatYouWilLearn : whatYouWilLearn ,
             price,
             tag : tag,
             category : categoryDetails._id,
