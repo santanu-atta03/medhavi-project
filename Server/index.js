@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, "public")));
 app.use(cors({
-	origin : "https://medhavi-pro.vercel.app/",
+	origin : "https://medhavi-pro.vercel.app",
   credentials: true, // if using cookies or auth headers
 }));
 
