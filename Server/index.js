@@ -33,7 +33,7 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, "public")));
 app.use(cors({
 //   origin: "https://study-notion-project-27te.vercel.app",
-	origin : "http://localhost:5173",
+	origin : "https://medhavi-seven.vercel.app",
   credentials: true, // if using cookies or auth headers
 }));
 
