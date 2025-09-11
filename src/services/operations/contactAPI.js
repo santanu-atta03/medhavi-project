@@ -6,13 +6,12 @@ const {
 } = contactusEndpoint
 
 
-export function contactus(token, formData){
+export function contactus(formData){
     return async(dispatch) => {
         const toastId = toast.loading("Loading...");
         try{
             const response = await apiConnector("POST", CONTACT_US_API, formData, {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json", // if you're sending JSON
+                "Content-Type": "application/json",
             })
 
             if (!response?.data?.success) {

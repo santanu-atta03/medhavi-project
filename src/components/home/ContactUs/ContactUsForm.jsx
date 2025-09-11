@@ -17,11 +17,15 @@ const ContactUsForm = () => {
     const submitContactForm = async(data) =>{
         console.log("Logging data : ", data);
         try{
-            setLoading(true);
-            dispatch(contactus(null, data))
-            setLoading(false);
+            setLoading(true)
+            const response = await dispatch(contactus(data));  // Await this
+            console.log("Dispatch result:", response);
+            
         }catch(err){
             console.log(err.message)
+        }
+        finally{
+            setLoading(false)
         }
     };
     useEffect(() => {
