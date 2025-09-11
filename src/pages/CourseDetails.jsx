@@ -20,7 +20,7 @@ import { addToCart } from "../slices/cartSlice"
 
 
 function CourseDetails() {
-  const { user } = useSelector((state) => state.profile)
+  const { user } = useSelector((state) => state.auth)
   const { token } = useSelector((state) => state.auth)
   const { loading } = useSelector((state) => state.profile)
   const { paymentLoading } = useSelector((state) => state.course)
@@ -182,7 +182,7 @@ function CourseDetails() {
               </div>
               <div>
                 <p className="">
-                  Created By {`${instructor.firstName} ${instructor.lastName}`}
+                  Created By {`${instructor?.firstName} ${instructor?.lastName}`}
                 </p>
               </div>
               <div className="flex flex-wrap gap-5 text-lg">
@@ -232,7 +232,13 @@ function CourseDetails() {
           <div className="my-8 border border-richblack-600 p-8">
             <p className="text-3xl font-semibold">What you'll learn</p>
             <div className="mt-5">
-              <ReactMarkdown>{whatYouWilLearn}</ReactMarkdown>
+              <ul className="list-disc list-inside space-y-2 mt-5">
+  {whatYouWilLearn.split(/\r?\n/).map((item, index) => (
+    <li key={index} className="text-yellow-50 text-md">
+      {item}
+    </li>
+  ))}
+</ul>
             </div>
           </div>
 

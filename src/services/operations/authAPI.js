@@ -9,7 +9,9 @@ import { endpoints } from "../apis"
 const {
   SENDOTP_API,
   SIGNUP_API,
+  SIGNUP_GOOGLE_API,
   LOGIN_API,
+  LOGIN_GOOGLE_API,
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
 } = endpoints
@@ -83,6 +85,44 @@ export function signUp(
   }
 }
 
+export function googleSignup(googleToken, navigate, accountType) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Signing up with Google...");
+    dispatch(setLoading(true));
+
+    try {
+      const response = await apiConnector("POST", SIGNUP_GOOGLE_API, {
+        token: googleToken,
+        accountType
+      });
+
+      const { token, user } = response.data;
+
+      if (!token || !user) {
+        throw new Error("Google signup failed");
+      }
+      
+      dispatch(setToken(token));
+      const userImage = user.image || `https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName} ${user.lastName}`;
+
+      dispatch(setUser({ ...user, image: userImage }));
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify({ ...user, image: userImage }));
+
+      toast.success("Signup successful");
+      navigate("/dashboard/my-profile");
+    } catch (error) {
+      console.error("Google Signup Error:", error);
+      toast.error(error?.response?.data?.message || "Google signup failed");
+    } finally {
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
+    }
+  };
+}
+
+
 export function login(email, password, navigate) {
   return async (dispatch) => {
 
@@ -131,7 +171,43 @@ export function login(email, password, navigate) {
   }
 }
 
+export function googleLogin(googleToken, navigate) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Signing in with Google...");
+    dispatch(setLoading(true));
 
+    try {
+      const response = await apiConnector("POST", LOGIN_GOOGLE_API, {
+        token: googleToken,
+      });
+      console.log("Response from google : ",response)
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success("Login Successful");
+
+      const userImage = response.data?.user?.image
+        ? response.data.user.image
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
+
+      dispatch(setToken(response.data.token));
+      dispatch(setUser({ ...response.data.user, image: userImage }));
+
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify({ ...response.data.user, image: userImage }));
+
+      navigate("/dashboard/my-profile");
+    } catch (error) {
+      console.error("Google Login Error:", error);
+      const message = error?.response?.data?.message || "Google login failed";
+      toast.error(message);
+    } finally {
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
+    }
+  };
+}
 export function logout(navigate) {
   return (dispatch) => {
     dispatch(setToken(null))

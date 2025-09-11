@@ -93,7 +93,7 @@ const CourseInformationForm = () => {
       currentValues.courseShortDesc !== course.courseDescription ||
       currentValues.coursePrice !== course.price ||
       currentValues.courseTags.toString() !== course.tag.toString() ||
-      currentValues.courseBenefits !== course.whatYouWillLearn ||
+      currentValues.courseBenefits !== course.whatYouWilLearn ||
       currentValues.courseCategory !== course.category._id ||
       currentValues.courseRequirements.toString() !== course.instructions.toString() ||
       currentValues.courseImage !== course.thumbnail
@@ -122,7 +122,7 @@ const CourseInformationForm = () => {
       formData.append("courseDescription", data.courseShortDesc)
       formData.append("price", data.coursePrice)
       formData.append("tag", JSON.stringify(tags))
-      formData.append("whatYouWillLearn", data.courseBenefits)
+      formData.append("whatYouWilLearn", data.courseBenefits)
       formData.append("category", data.courseCategory)
       formData.append("instructions", JSON.stringify(requirements))
       if (data.courseImage !== course.thumbnail) {
@@ -142,7 +142,7 @@ const CourseInformationForm = () => {
       formData.append("courseDescription", data.courseShortDesc)
       formData.append("price", data.coursePrice)
       formData.append("tag", JSON.stringify(tags))
-      formData.append("whatYouWillLearn", data.courseBenefits)
+      formData.append("whatYouWilLearn", data.courseBenefits)
       formData.append("category", data.courseCategory)
       formData.append("instructions", JSON.stringify(requirements))
       formData.append("status", COURSE_STATUS.DRAFT)
@@ -328,6 +328,7 @@ const CourseInformationForm = () => {
         )}
         <IconBtn
           disabled={loading}
+          
           className="bg-yellow-25 text-richblack-800 px-6 md:px-4 py-2 rounded flex items-center gap-2"
         >
           {!editCourse ? "Next" : "Save Changes"} <MdNavigateNext />

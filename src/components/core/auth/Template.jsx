@@ -36,7 +36,7 @@ function Template({ title, description1, description2, image, formType }) {
             </p>
             {formType === "signup" ? <SignupForm accountType = {accountType} setAccountType={setAccountType}/> : <LoginForm />}
           </div>
-          <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0 mt-24 overflow-hidden">
+          <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0 mt-10 overflow-hidden">
             <img
               src={frameImg}
               alt="Pattern"

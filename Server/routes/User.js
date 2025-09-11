@@ -5,7 +5,10 @@ const router = express.Router()
 // Import the required controllers and middleware functions
 const {
   logIn,
+  googleLogin,
   signUp,
+  googleSignup,
+  googleAuthCodeLogin,
   sendOTP,
   changePassword,
 } = require("../controllers/Auth")
@@ -25,9 +28,12 @@ const { auth } = require("../middlewares/auth")
 
 // Route for user login
 router.post("/login", logIn)
+router.post("/google-login", googleLogin);
 
 // Route for user signup
 router.post("/signup", signUp)
+router.post("/google-signup", googleSignup)
+router.post("/google-auth-code", googleAuthCodeLogin);
 
 // Route for sending OTP to the user's email
 router.post("/sendotp", sendOTP)

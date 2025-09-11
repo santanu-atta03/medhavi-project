@@ -95,6 +95,54 @@ module.exports = {
         800: "#4F0A25",
         900: "#340019",
       },
+      navy: {
+    50: '#F0F3FB',
+    100: '#D9E1F3',
+    200: '#B7C8E9',
+    300: '#8FAADD',
+    400: '#607FCF',
+    500: '#1A2A52', // approximate main dark navy #0a0e27 darker shade
+    600: '#0F1E3B',
+    700: '#0A1630',
+    800: '#071025',
+    900: '#050B1B',
+  },
+   cyan: {
+    50: '#E0F7FF',
+    100: '#B3E8FF',
+    200: '#80D5FF',
+    300: '#4CC2FF',
+    400: '#26B0FF',
+    500: '#00A0FF',  // main cyan approx #00d4ff lighter shade
+    600: '#0083CC',
+    700: '#006099',
+    800: '#004066',
+    900: '#002033',
+  },
+    orange: {
+    50: '#FFF3E5',
+    100: '#FFD4A6',
+    200: '#FFB370',
+    300: '#FF9244',
+    400: '#FF751A',
+    500: '#FF6200',  // main orange approx #ff6b35 darker shade
+    600: '#CC5600',
+    700: '#993F00',
+    800: '#662800',
+    900: '#331400',
+  },
+  green: {
+    50: '#E6FFF3',
+    100: '#B3F7D6',
+    200: '#80E9B1',
+    300: '#4CCB8D',
+    400: '#29B271',
+    500: '#009A57',  // main green approx #00ff88 darker shade
+    600: '#007946',
+    700: '#005934',
+    800: '#003922',
+    900: '#002012',
+  },
       yellow: {
         5: "#FFF970",
         25: "#FFE83D",
@@ -136,7 +184,28 @@ module.exports = {
         700: "#b91c1c",
         800: "#991b1b",
         900: "#7f1d1d",
-      }
+      },
+      codeRed: {
+    500: '#ff5f56', // code editor red dot
+  },
+  codeYellow: {
+    500: '#ffbd2e', // code editor yellow dot
+  },
+  codeGreen: {
+    500: '#27c93f', // code editor green dot
+  },
+  gray: {
+    50: '#F9FAFB',
+    100: '#F3F4F6',
+    200: '#E5E7EB',
+    300: '#D1D5DB',
+    400: '#9CA3AF',
+    500: '#6B7280',
+    600: '#4B5563',
+    700: '#374151',
+    800: '#1F2937',
+    900: '#111827',
+  },
 
     },
     extend: {

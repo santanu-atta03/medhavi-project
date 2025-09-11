@@ -4,7 +4,9 @@
 export const endpoints = {
   SENDOTP_API: `${import.meta.env.VITE_BASE_URL}/auth/sendotp`,
   SIGNUP_API: `${import.meta.env.VITE_BASE_URL}/auth/signup`,
+  SIGNUP_GOOGLE_API: `${import.meta.env.VITE_BASE_URL}/auth/google-signup`,
   LOGIN_API: `${import.meta.env.VITE_BASE_URL}/auth/login`,
+  LOGIN_GOOGLE_API : `${import.meta.env.VITE_BASE_URL}/auth/google-login`,
   RESETPASSTOKEN_API: `${import.meta.env.VITE_BASE_URL}/auth/reset-password-token`,
   RESETPASSWORD_API: `${import.meta.env.VITE_BASE_URL}/auth/reset-password`,
 }

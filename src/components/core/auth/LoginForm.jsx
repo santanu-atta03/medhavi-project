@@ -2,12 +2,12 @@ import { useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-
-import { login } from "../../../services/operations/authAPI"
-
+import { GoogleLogin } from '@react-oauth/google';
+import { googleLogin, login } from "../../../services/operations/authAPI"
+import googlelogo from "../../../assets/Logo/google-color.svg"
 function LoginForm() {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -29,6 +29,18 @@ function LoginForm() {
     dispatch(login(email, password, navigate))
   }
 
+
+  const handleGoogleSuccess = async (response) => {
+    const googleToken = response.credential;
+    dispatch(googleLogin(googleToken, navigate));
+  };
+
+  const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const REDIRECT_URI = "http://localhost:5173/auth/google/callback"; 
+const SCOPE = "openid profile email";
+const RESPONSE_TYPE = "code";
+
+const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
   return (
     <form
       onSubmit={handleOnSubmit}
@@ -90,6 +102,22 @@ function LoginForm() {
       >
         Sign In
       </button>
+
+      <div className="flex items-center w-full mx-auto">
+                {/* <GoogleLogin
+                  onSuccess={(response) => {
+                    const googleToken = response.credential;
+                    dispatch(googleSignup(googleToken, navigate,accountType));
+                  }}
+                  onError={() => {
+                    toast.error("Google Signup Failed");
+                  }}
+                /> */}
+                <a href={googleAuthUrl} className="flex items-center justify-center gap-2 text-white bg-blue-600  px-4 py-2 rounded-md hover:bg-blue-700 transition-all duration-300 w-full">
+                    <img src={googlelogo} alt="Google" className="w-5 h-5" />
+                    Sign up with Google
+                </a>
+            </div>
     </form>
   )
 }

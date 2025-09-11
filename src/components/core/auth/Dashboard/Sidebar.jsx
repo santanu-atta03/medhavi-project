@@ -50,7 +50,7 @@ const Sidebar = () => {
                     />
                 </div>
 
-                <div className=" gap-2 h-[600px] w-full bg-gray-100 text-richblack-300 ml-7 " >
+                <div className=" gap-2 h-[600px] w-[60%] bg-richblack-800 text-richblack-300 ml-7 " >
                     <button onClick={() => setShowLogOutModal(true)} className='flex flex-row gap-2 items-center'>
 
                     <IoLogInOutline size={20}/>

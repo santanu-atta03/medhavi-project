@@ -8,6 +8,10 @@ export const NavbarLinks = [
     // path: '/catalog',
   },
   {
+    title : "PYQ",
+    path : "/pyq"
+  },
+  {
     title: "About Us",
     path: "/about",
   },

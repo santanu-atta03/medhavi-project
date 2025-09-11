@@ -32,6 +32,11 @@ import PrivateRoute from "./components/core/auth/PrivateRoute";
 import Instructor from "./components/core/auth/InstructorDasboard/Instructor";
 import Error from "./components/Common/Error";
 import ViewCourse from "./pages/View_Course";
+import PYQ from "./pages/PYQ";
+import MakautPyq from "./components/home/Makaut/MakautPyq";
+import PyqList from "./components/home/PYQ/PyqList";
+import { setLogin } from "./slices/authSlice";
+import GoogleCallback from "./pages/GoogleCallback";
 
 function App() {
   const dispatch = useDispatch();
@@ -66,6 +71,18 @@ function App() {
   //   }
   // }, [token, dispatch]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+
+    if (token && user) {
+      dispatch(setLogin({
+        token,
+        user: JSON.parse(user),
+      }));
+    }
+  }, []);
+
   return (
     <div className="w-screen min-h-screen bg-richblack-900 font-inter flex flex-col">
       <Navbar />
@@ -75,6 +92,11 @@ function App() {
         <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/auth/google/callback" element={<GoogleCallback />} />
+        <Route path="/pyq" element={<PYQ />}/>
+        <Route path="/pyq/makaut" element={<MakautPyq /> } />
+        <Route path="/pyq/makaut/:dept" element={<PyqList />} />
+        
         <Route path="/login" element={<Login />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route

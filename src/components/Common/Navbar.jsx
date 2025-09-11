@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { NavbarLinks } from "../../Data/navbar-links";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/Logo/Logo-Full-Light.png";
+import file from "../../assets/Logo/Medhavi.mp4"
+import logo3 from "../../assets/Logo/logo3.png"
 import { useSelector } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
 import "./Navbar.css";
@@ -20,9 +22,10 @@ import { IoHome } from "react-icons/io5";
 import { IoIosContact } from "react-icons/io";
 import { FcAbout } from "react-icons/fc";
 import SidebarModal from "./SidebarModal";
+import homebg from "../../assets/Images/homebg.png"
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
-  const { user } = useSelector((state) => state.profile);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   const { totalItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,28 +54,35 @@ const Navbar = () => {
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname);
   };
+  console.log("User:", user);
+console.log("Account Type:", user?.accountType);
+console.log("Is Authenticated:", isAuthenticated);
 
   return (
-    <div className="flex h-14 items-center justify-center border-b-2 border-b-richblack-400 bg-richblack-700">
+    <div className="flex h-20 items-center justify-center bg-richblack-900 text-white" >
       <div className="w-11/12 max-w-maxContent flex items-center justify-between absolute sm:ml-3">
-        <Link to={"/"}>
-          <img src={logo} alt="logo" className="" />
-        </Link>
+          <Link className="flex items-center gap-3 text-2xl font-bold" to={"/"}>
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-lg animate-pulse">
+              💡
+            </div>
+            <span>Medhavi</span>
+          </Link>
+
 
         <nav className="hidden md:block ">
-          <ul className="flex gap-x-6 text-richblack-25">
+          <ul className="hidden md:flex gap-10 text-white list-none">
             {NavbarLinks.map((link, index) => (
               <li key={index}>
                 {link.title === "Catalog" ? (
                   
-                    token != null && (
+                    token != null && isAuthenticated && (
                       <>
                     <div
                       className={`group relative flex cursor-pointer items-center gap-1 ${
                         matchRoute("/catalog/:catalogName")
                           ? "text-yellow-25"
-                          : "text-richblack-25"
-                      }`}
+                          : "text-richblack-5"
+                      } transition-colors duration-300 hover:text-cyan-400 after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-cyan-400 after:to-orange-500 after:transition-all after:duration-300 hover:after:w-full`}
                     >
                       <p>{link.title}</p>
                       <BsChevronDown />
@@ -111,11 +121,7 @@ const Navbar = () => {
                 ) : (
                   <Link to={link?.path}>
                     <p
-                      className={`${
-                        matchRoute(link?.path)
-                          ? "text-yellow-25"
-                          : "text-richblack-25"
-                      }`}
+                      className="relative transition-colors duration-300 hover:text-cyan-400 after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-cyan-400 after:to-orange-500 after:transition-all after:duration-300 hover:after:w-full"
                     >
                       {link.title}
                     </p>
@@ -127,7 +133,7 @@ const Navbar = () => {
         </nav>
 
         <div className="flex gap-x-2 md:gap-x-5 items-center">
-          {user && user?.accountType != "Instructor" && (
+          {user && isAuthenticated &&  user?.accountType != "Instructor" && (
             <Link to={"/dashboard/cart"} className="relative">
               <FaShoppingCart className="text-richblack-400" size={22} />
               {totalItems > 0 && (
@@ -140,24 +146,31 @@ const Navbar = () => {
 
           {token === null && (
             <div className="hidden md:block">
-              <Button active={false} linkto={"/login"}>
-                <div className="text-richblack-5">Log in</div>
-              </Button>
+              <Link
+                className="btn-signup bg-white bg-opacity-10 border border-white border-opacity-30 text-[#e6e7ee] rounded-full px-6 py-2.5 font-semibold text-base hover:-translate-y-[2px] hover:bg-opacity-30 transition-all duration-300" to={"/login"}
+              >
+
+                  Log in
+              
+              </Link>
+
             </div>
           )}
           {token === null && (
             <div className="hidden md:block">
-              <Button active={true} linkto={"/signup"}>
-                <div className="flex items-center gap-2">
-                  Sign up
-                  <FaArrowRight />
-                </div>
-              </Button>
+              <Link
+                className="btn-signup bg-gradient-to-br from-cyan-400 to-green-400 text-[#0a0e27] rounded-full px-6 py-2.5 font-semibold text-base hover:-translate-y-[2px] hover:shadow-[0_10px_30px_rgba(0,212,255,0.4)] transition-transform duration-300" to={"/signup"}
+              >
+
+                  Sign Up
+              
+              </Link>
+
             </div>
           )}
           
           
-          {token && <ProfileDropDown />}
+          {user && isAuthenticated && <ProfileDropDown />}
           <div className="background md:hidden">
             <button className="menu__icon" onClick={() => setSidebarModal(true)}>
               <span></span>

@@ -6,7 +6,18 @@ const Profile = require("../models/Profile");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const {passwordUpdated} = require("../mail/templates/passwordUpdate");
+const { OAuth2Client } = require("google-auth-library");
+
+const client = new OAuth2Client(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URI
+);
 require("dotenv").config();
+
+const generateToken = (userId) => {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
+};
 
 // send otp
 
@@ -154,6 +165,154 @@ exports.signUp = async(req, res) => {
     }
 };
 
+
+exports.googleAuthCodeLogin = async (req, res) => {
+  const { code, accountType } = req.body;
+
+  try {
+    // 1. Exchange code for tokens
+    const { tokens } = await client.getToken(code);
+    const idToken = tokens.id_token;
+
+    // 2. Verify and decode id_token
+    const ticket = await client.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { email, name, picture, sub } = payload;
+
+    // 3. Find or create user
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // You can choose how to assign accountType here.
+      // For now, default to 'Student'
+      const [firstName, ...lastNameArr] = name.split(" ");
+      const lastName = lastNameArr.join(" ");
+      const hashedPassword = await bcrypt.hash(email + process.env.JWT_SECRET, 10);
+
+      const profileDetails = await Profile.create({
+        gender : null,
+        dateOfBirth : null,
+        about : null,
+        contactNumber : null
+    });
+      user = await User.create({
+        firstName,
+        lastName,
+        email,
+        password : hashedPassword,
+        image: picture,
+        accountType: accountType, 
+        verified: true,
+        googleId: sub,
+        additionalDetails : profileDetails._id
+      });
+    }
+
+    // 4. Generate JWT token
+    const tokenPayload = {
+      id: user._id,
+      email: user.email,
+      accountType: user.accountType,
+    };
+
+    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, {
+      expiresIn: "24h",
+    });
+
+    // 5. Return token + user
+    res.json({
+      success: true,
+      message: "Login successful",
+      token,
+      user,
+    });
+  } catch (err) {
+    console.error("Google OAuth Error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Google login failed",
+    });
+  }
+};
+exports.googleSignup = async (req, res) => {
+  try {
+    const { token, accountType } = req.body;
+
+    if (!token) {
+      return res.status(400).json({ success: false, message: "Token is missing" });
+    }
+
+    // Verify token with Google
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+
+    const { email, given_name, family_name, picture } = payload;
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User already exists. Please log in instead.",
+      });
+    }
+
+    // Create fake password to satisfy schema
+    const hashedPassword = await bcrypt.hash(email + process.env.JWT_SECRET, 10);
+
+    const profileDetails = await Profile.create({
+        gender : null,
+        dateOfBirth : null,
+        about : null,
+        contactNumber : null
+    });
+    const newUser = await User.create({
+      firstName: given_name,
+      lastName: family_name || "",
+      email,
+      password: hashedPassword,
+      image: picture,
+      accountType: accountType,
+      additionalDetails : profileDetails._id,
+    });
+
+    // Create JWT token
+    const jwtToken = jwt.sign(
+      { id: newUser._id, email: newUser.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Signup successful",
+      token: jwtToken,
+      user: {
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        email: newUser.email,
+        image: newUser.image,
+        accountType: newUser.accountType,
+      },
+    });
+  } catch (error) {
+    console.error("Google Signup Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Signup failed. Try again later.",
+    });
+  }
+};
+
 // login
 
 exports.logIn = async(req, res) => {
@@ -231,6 +390,41 @@ exports.logIn = async(req, res) => {
     }
 };
 
+exports.googleLogin = async (req, res) => {
+  const { token } = req.body;
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    console.log("Payload : ",payload)
+    const { sub, email, given_name, family_name, picture } = payload;
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      user = await User.create({
+        firstName:given_name,
+        lastName : family_name,
+        email : email,
+        googleId: sub,
+        image: picture,
+      });
+    }
+
+    const jwtToken = generateToken(user._id);
+    res.status(200).json({ 
+        success : true,
+        token: jwtToken, 
+        user 
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(401).json({ message: "Google authentication failed" });
+  }
+};
 // change password
 
 exports.changePassword = async(req, res) => {

@@ -11,14 +11,21 @@ import InstructorSection from '../components/home/InstructorSection';
 import ExploreMore from '../components/home/ExploreMore';
 import Footer from '../components/Common/Footer';
 import ReviewSlider from '../components/Common/ReviewSlider';
-
+import bghome from "../assets/Images/homebg.png"
+import HomeFront from '../components/Common/HomeFront';
 const Home = () => {
   return (
-    <div className=''>
-      {/* section 1 div */}
-      <div className='relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 text-white'>
+    <div className='mt-0 relative'>
+
+      <div className='homefrontbody'>
+        <HomeFront />
+      </div>
+
+      {/* <div className='w-full flex flex-col items-center  left-2 h-[700px] mx-auto' style={{backgroundImage : `url(${bghome})`}}>
+
+      
         <Link to={"/signup"}>
-          <div className='group mx-auto mt-16 w-fit bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none rounded-full overflow-hidden relative'>
+          <div className='group mx-auto mt-16 mb-20 w-fit bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none rounded-full overflow-hidden relative'>
             <div className='flex items-center gap-2 rounded-md px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-800 overflow-hidden'>
               <p>Become an instructor</p>
               <FaArrowRight />
@@ -26,28 +33,33 @@ const Home = () => {
           </div>
         </Link>
 
-        <div className='flex gap-2 text-4xl'>
-          <p>Empower your future with </p>
-          <HighlightText text = {" Coding Skills"} />
-        </div>
+          <div className='w-[92%] h-[40%] bg-caribbeangreen-400 px-3 py-6 rounded-2xl md:h-20 md:w-[35%]  md:bg-opacity-0 md:px-0 md:py-0 text-center mx-auto'>
 
-        <div className='max-w-[750px] text-[15px] text-center'>
-          <p>With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback from instructors. </p>
-        </div>
+         
+        
+           <div className='flex flex-col items-center gap-2 text-4xl mb-5 '>
+              <p>Empower your future with <span><HighlightText text = {" Coding Skills"} /></span> </p>
+              
+            </div>
 
-        <div className='flex gap-5'>
+            <div className='w-full md:max-w-[600px] text-[15px] text-center text-white pr-5 mr-8 mt-5 md:mt-0 '>
+              <p>With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback from instructors. </p>
+            </div>
+         </div>
+       
+
+        <div className='flex gap-5 mt-32'>
           <Button linkto={"/signup"} active={true} children={"Learn more"} />
-          <Button linkto={"/signup"} active={false} children={"Book a demo"} />
+          <Link to={"/signup"} className='text-center text-[13px] sm:text-[16px] px-6 py-3 rounded-md font-bold shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] hover:shadow-none hover:scale-95 transition-all duration-200 bg-richblack-300'>
+            Book a demo
+          </Link>
         </div>
+      </div> */}
 
-        <div className='w-[410px] md:w-[1035px] shadow-[0_-10px_30px_-5px]  shadow-blue-200 mx-3 my-7'>
-          <video src={Banner}
-          muted
-          loop
-          autoPlay
-          className='shadow-[20px_20px_rgba(255,255,255)]'
-          ></video>
-        </div>
+
+      {/* section 1 div */}
+      <div className='relative mx-auto flex w-11/12 max-w-maxContent  flex-col items-center justify-between gap-8 text-white bg-[url("../assets/Images/homebg.png")]' >
+      
 
         <div className=''>
           <Codeblocks 

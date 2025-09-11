@@ -1,7 +1,7 @@
 import React from "react";
 import { FooterLink2 } from "../../Data/footer-links";
 import { Link } from "react-router-dom";
-
+import logo3 from "../../assets/Logo/logo3.png"
 // Images
 import Logo from "../../assets/Logo/Logo-Full-Light.png";
 
@@ -29,8 +29,8 @@ const Footer = () => {
         <div className="border-b w-[100%] flex flex-col lg:flex-row pb-5 border-richblack-700">
           {/* Section 1 */}
           <div className="lg:w-[50%] flex flex-wrap flex-row justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3">
-            <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
-              <img src={Logo} alt="" className="object-contain" />
+            <div className="w-[30%] flex flex-col items-center gap-3 lg:w-[32%] mb-7 lg:pr-4">
+              <img src={logo3} alt="" className="" width={360}/>
               <h1 className="text-richblack-50 font-semibold text-[16px]">
                 Company
               </h1>
@@ -172,7 +172,7 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center">Made with ❤️ Santanu © 2023 Studynotion</div>
+          <div className="text-center">Made with ❤️ Santanu © 2025 Medhavi</div>
         </div>
       </div>
     </div>

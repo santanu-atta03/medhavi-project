@@ -6,8 +6,14 @@ import IconButton from '../../../Common/IconButton';
 import { AiFillEdit } from "react-icons/ai";
 
 const MyProfile = () => {
-    const {user} = useSelector((state) => state.profile);
+    const {user} = useSelector((state) => state.auth);
     const navigate = useNavigate();
+    console.log("User from Redux:", user);
+
+
+    // if (!user) {
+    //     return <div className='loader'>Loading...</div>;
+    // }
 
     return (
         <>
