@@ -16,9 +16,18 @@ const ContactUsForm = () => {
 
     const submitContactForm = async(data) =>{
         console.log("Logging data : ", data);
+        const fullContactNumber = `${data.countryCode}${data.contactNumber}`;
+        const payload = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            contactNumber: fullContactNumber,
+            description: data.description, // Already named correctly in textarea
+        };
+
         try{
             setLoading(true)
-            const response = await dispatch(contactus(data));  // Await this
+            const response = await dispatch(contactus(payload));  // Await this
             console.log("Dispatch result:", response);
             
         }catch(err){
@@ -35,7 +44,7 @@ const ContactUsForm = () => {
                 firstName:"",
                 lastName:"",
                 contactNumber:"",
-                message : ""
+                description : ""
             })
         }
     },[reset, isSubmitSuccessful])
@@ -179,9 +188,9 @@ const ContactUsForm = () => {
                     }}
                     placeholder="Enter your message here"
                     className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
-                    {...register("message", { required: true })}
+                    {...register("description", { required: true })}
                 />
-                {errors.message && (
+                {errors.description && (
                     <span className="-mt-1 text-[12px] text-yellow-100">
                         Please enter your Message.
                     </span>
