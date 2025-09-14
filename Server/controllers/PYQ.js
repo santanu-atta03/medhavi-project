@@ -16,7 +16,7 @@ exports.getPyqsByDept = (req, res) => {
 // download one file
 exports.downloadPyq = (req, res) => {
   const { dept, filename } = req.params;
-  const filePath = path.join(__dirname, "../pyq", dept, filename);
+  const filePath = path.join(__dirname, "../PYQ", dept, filename);
 
   res.download(filePath, filename, (err) => {
     if (err) res.status(404).send("File not found!");
