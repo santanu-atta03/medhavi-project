@@ -7,9 +7,9 @@ import SignupForm from "./SignupForm"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
 import instructorImage from "../../../assets/Images/Instructor.png"
 
-function Template({ title, description1, description2, image, formType }) {
+function Template({ title, description1, description2, image, formType, accountType, setAccountType }) {
     const { loading } = useSelector((state) => state.auth)
-    const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
+    // const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
   return (
     <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
       {loading ? (

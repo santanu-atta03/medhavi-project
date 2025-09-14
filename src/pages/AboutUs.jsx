@@ -22,7 +22,7 @@ const AboutUs = () => {
                     
                     <div className='w-[65%] text-center mx-auto mt-28 mb-10'>
                         <p className='text-4xl font-semibold mb-5'>Driving Innovation in Online Education for a <HighlightText text={"Brighter Future"} /></p>
-                        <p className='text-[17px]  text-center text-richblack-300 font-inter font-medium'>Studynotion is at the forefront of driving innovation in online education. We're passionate about creating a brighter future by offering cutting-edge courses, leveraging emerging technologies, and nurturing a vibrant learning community.</p>
+                        <p className='text-[17px]  text-center text-richblack-300 font-inter font-medium'>Medhavi is at the forefront of driving innovation in online education. We're passionate about creating a brighter future by offering cutting-edge courses, leveraging emerging technologies, and nurturing a vibrant learning community.</p>
                     </div>
 
                     <div className='shadow-[0_0_50px_11px]  shadow-brown-400 mx-3 my-7 p-1 w-[290px] h-[5px] mt-5'></div>

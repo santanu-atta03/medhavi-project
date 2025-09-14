@@ -14,7 +14,7 @@ const InstructorSection = () => {
 
         <div className='w-[60%] gap-5 flex flex-col items-start justify-center'>
             <h1 className='font-semibold text-3xl w-[30%]'>Become an <HighlightText text={"Instructor"} /></h1>
-            <p className=''>Instructors from around the world teach millions of students on StudyNotion. We provide the tools and skills to teach what you love.</p>
+            <p className=''>Instructors from around the world teach millions of students on Medhavi. We provide the tools and skills to teach what you love.</p>
 
             <Button active={true} linkto={"/signup"}>
                 <div className='flex gap-3 items-center'>

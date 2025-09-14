@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ACCOUNT_TYPE } from '../../utils/constants';
 
 // export default function HomeFront() {
 //   return (
@@ -294,7 +295,7 @@ import { Link } from 'react-router-dom';
 
 
 
-export default function HomeFront() {
+export default function HomeFront({setAccountType}) {
   return (
     <>
       {/* Animated Background */}
@@ -326,9 +327,9 @@ export default function HomeFront() {
       </div>
 
       {/* Instructor Badge */}
-      <div className="top-[16px] mt-8 md:mt-0 mb-5 md:top-[40px] absolute right-4 md:right-8 bg-gradient-to-br from-orange-500 via-yellow-400 to-yellow-300 text-white px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold cursor-pointer z-50 transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_30px_rgba(255,107,53,0.4)] select-none animate-slideInRight text-sm md:text-base">
+      <Link className="top-[16px] mt-8 md:mt-0 mb-5 md:top-[40px] absolute right-4 md:right-8 bg-gradient-to-br from-orange-500 via-yellow-400 to-yellow-300 text-white px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold cursor-pointer z-50 transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_30px_rgba(255,107,53,0.4)] select-none animate-slideInRight text-sm md:text-base" to={"/signup"} onClick={() => setAccountType(ACCOUNT_TYPE.INSTRUCTOR)}>
         🎓 Become an Instructor →
-      </div>
+      </Link>
 
       {/* Hero Section */}
       <section className="min-h-screen pb-8 px-4 md:px-[5%] flex flex-col  items-center relative z-10 homefronthero">

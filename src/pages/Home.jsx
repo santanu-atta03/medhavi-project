@@ -13,12 +13,12 @@ import Footer from '../components/Common/Footer';
 import ReviewSlider from '../components/Common/ReviewSlider';
 import bghome from "../assets/Images/homebg.png"
 import HomeFront from '../components/Common/HomeFront';
-const Home = () => {
+const Home = ({setAccountType}) => {
   return (
     <div className='mt-0 relative'>
 
       <div className='homefrontbody'>
-        <HomeFront />
+        <HomeFront setAccountType={setAccountType}/>
       </div>
 
       {/* <div className='w-full flex flex-col items-center  left-2 h-[700px] mx-auto' style={{backgroundImage : `url(${bghome})`}}>
@@ -127,7 +127,7 @@ const Home = () => {
                 <HighlightText text={"job that is in demand"} />
               </div>
               <div className='w-[40%] gap-6 flex flex-col items-start justify-start'>
-                <p className='text-[16px]'>The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.</p>
+                <p className='text-[16px]'>The modern Medhavi is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.</p>
                 <Button active={true} linkto={"/signup"}>
                   Learn more
                 </Button>

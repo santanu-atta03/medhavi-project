@@ -37,11 +37,13 @@ import MakautPyq from "./components/home/Makaut/MakautPyq";
 import PyqList from "./components/home/PYQ/PyqList";
 import { setLogin } from "./slices/authSlice";
 import GoogleCallback from "./pages/GoogleCallback";
+import { ACCOUNT_TYPE } from "./utils/constants";
 
 function App() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const { user } = useSelector((state) => state.profile);
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
 
   // useEffect(() => {
   //   const fetchUserProfile = async () => {
@@ -88,10 +90,10 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home setAccountType={setAccountType}/>} />
         <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp accountType={accountType} setAccountType={setAccountType}/>} />
         <Route path="/auth/google/callback" element={<GoogleCallback />} />
         <Route path="/pyq" element={<PYQ />}/>
         <Route path="/pyq/makaut" element={<MakautPyq /> } />
