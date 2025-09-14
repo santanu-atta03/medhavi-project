@@ -37,7 +37,6 @@ import MakautPyq from "./components/home/Makaut/MakautPyq";
 import PyqList from "./components/home/PYQ/PyqList";
 import { setLogin } from "./slices/authSlice";
 import GoogleCallback from "./pages/GoogleCallback";
-import { ACCOUNT_TYPE } from "./utils/constants";
 
 function App() {
   const dispatch = useDispatch();
