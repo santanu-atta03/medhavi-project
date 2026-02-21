@@ -15,12 +15,24 @@ dist-ssr
 # Dependency directories
 node_modules
 
-# Environment variables
-**/.env      # Ignores .env files in all folders
+# ===========================
+# 🔒 Environment Variables
+# NEVER commit .env files!
+# ===========================
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.test
+src/.env
+src/.env.*
+Server/.env
+Server/.env.*
 
 # IDEs and Editors
 .vscode/*
-!.vscode/extensions.json   # Keep only extensions.json in .vscode
+!.vscode/extensions.json
 .idea
 .DS_Store
 
@@ -30,5 +42,3 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
-
-Server/.env
