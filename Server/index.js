@@ -38,6 +38,18 @@ app.use(cors(corsOptions));
 // Handle preflight for all routes
 app.options("*", cors(corsOptions));
 
+// Explicitly set CORS headers for every response as a backup
+app.use((req, res, next) => {
+	const origin = req.headers.origin;
+	if (allowedOrigins.includes(origin) || (origin && origin.includes("vercel.app"))) {
+		res.setHeader("Access-Control-Allow-Origin", origin);
+	}
+	res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+	res.setHeader("Access-Control-Allow-Credentials", "true");
+	next();
+});
+
 // Logging middleware for Render
 app.use((req, res, next) => {
 	console.log(`${req.method} ${req.path} - Origin: ${req.headers.origin}`);
@@ -83,6 +95,16 @@ app.get("/", (req, res) => {
 	return res.json({
 		success: true,
 		message: "Your server is up and running....",
+	});
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+	console.error("GLOBAL ERROR:", err.stack);
+	res.status(500).json({
+		success: false,
+		message: "Internal Server Error",
+		error: err.message,
 	});
 });
 

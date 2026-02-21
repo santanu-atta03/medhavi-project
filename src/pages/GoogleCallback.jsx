@@ -33,7 +33,7 @@ function GoogleCallback() {
     }
     async function exchangeCodeForToken() {
       try {
-        const response = await axios.post("https://medhavi-project-1.onrender.com/api/v1/auth/google-auth-code", {
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/google-auth-code`, {
           code,
           accountType
         });

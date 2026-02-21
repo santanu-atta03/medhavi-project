@@ -10,7 +10,7 @@ const PyqList = () => {
 
   useEffect(() => {
     axios
-      .get(`https://medhavi-project-1.onrender.com/api/v1/pyq/departments/${dept}/pyqs`)
+      .get(`${import.meta.env.VITE_BASE_URL}/pyq/departments/${dept}/pyqs`)
       .then((res) => {
         setFiles(res.data.files || []);
         setLoading(false);
@@ -61,14 +61,14 @@ const PyqList = () => {
 
               {/* Tailwind Download Button */}
               <a
-                href={`https://medhavi-project-1.onrender.com/api/v1/pyq/departments/${dept}/download/${file}`}
+                href={`${import.meta.env.VITE_BASE_URL}/pyq/departments/${dept}/download/${file}`}
                 className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
                 <div className="flex flex-col items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-full w-[100px] h-[100px] shadow-lg transform transition-transform duration-300 hover:scale-110">
                   <div className="relative w-8 h-8 mb-2">
                     {/* Arrow line */}
                     <div className="absolute  animate-bounce animate-delay-150">
-                        <FaCloudDownloadAlt size={30}/>
+                      <FaCloudDownloadAlt size={30} />
                     </div>
                   </div>
                   <span className="text-sm font-semibold">Download</span>
