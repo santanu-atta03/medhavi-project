@@ -171,7 +171,10 @@ exports.googleAuthCodeLogin = async (req, res) => {
 
   try {
     // 1. Exchange code for tokens
-    const { tokens } = await client.getToken(code);
+    const { tokens } = await client.getToken({
+      code,
+      redirect_uri: process.env.GOOGLE_REDIRECT_URI
+    });
     const idToken = tokens.id_token;
 
     // 2. Verify and decode id_token
@@ -181,17 +184,17 @@ exports.googleAuthCodeLogin = async (req, res) => {
     });
 
     const payload = ticket.getPayload();
-    const { email, name, picture, sub } = payload;
+    const { email, name, picture, sub, given_name, family_name } = payload;
 
     // 3. Find or create user
     let user = await User.findOne({ email });
 
     if (!user) {
-      // You can choose how to assign accountType here.
-      // For now, default to 'Student'
-      const [firstName, ...lastNameArr] = name.split(" ");
-      const lastName = lastNameArr.join(" ");
-      const hashedPassword = await bcrypt.hash(email + process.env.JWT_SECRET, 10);
+      // Use given_name/family_name if available, otherwise fallback to name splitting
+      const fName = given_name || (name ? name.split(" ")[0] : "Google");
+      const lName = family_name || (name ? name.split(" ").slice(1).join(" ") : "User");
+
+      const hashedPassword = await bcrypt.hash(email + (process.env.JWT_SECRET || "google-auth"), 10);
 
       const profileDetails = await Profile.create({
         gender: null,
@@ -199,13 +202,14 @@ exports.googleAuthCodeLogin = async (req, res) => {
         about: null,
         contactNumber: null
       });
+
       user = await User.create({
-        firstName,
-        lastName,
+        firstName: fName,
+        lastName: lName || " ", // Ensure it's not empty if required
         email,
         password: hashedPassword,
         image: picture,
-        accountType: accountType,
+        accountType: accountType || "Student",
         verified: true,
         googleId: sub,
         additionalDetails: profileDetails._id
@@ -231,10 +235,15 @@ exports.googleAuthCodeLogin = async (req, res) => {
       user,
     });
   } catch (err) {
-    console.error("Google OAuth Error:", err);
+    console.error("Google OAuth Error Details:", {
+      message: err.message,
+      stack: err.stack,
+      response: err.response ? err.response.data : "No response data",
+    });
     res.status(500).json({
       success: false,
       message: "Google login failed",
+      error: err.message,
     });
   }
 };
