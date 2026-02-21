@@ -17,13 +17,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 
-if (process.env.NODE_ENV === "production") {
-  console.log = function () {};
-  console.info = function () {};
-  console.debug = function () {};
-  console.warn = function () {};
-  // You can keep console.error if you want to see errors
-}
+// if (process.env.NODE_ENV === "production") {
+//   console.log = function () {};
+//   console.info = function () {};
+//   console.debug = function () {};
+//   console.warn = function () {};
+//   // You can keep console.error if you want to see errors
+// }
 
 //database connect
 dbConnect();
