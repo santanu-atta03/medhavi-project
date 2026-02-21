@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
-const dns = require("dns");
 require("dotenv").config();
-
-// Force Google DNS to bypass ISP's broken SRV DNS resolver
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 exports.dbConnect = () => {
     mongoose.connect(process.env.MONGODB_URL)
@@ -11,8 +7,7 @@ exports.dbConnect = () => {
             console.log("DB connected sucessfully.")
         })
         .catch((error) => {
-            console.log("DB connection failed!");
-            console.log(error.message);
-            process.exit(1);
+            console.error("DB connection failed! Error:", error.message);
+            // Don't process.exit(1) — that crashes Render and breaks CORS
         })
 };

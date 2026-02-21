@@ -353,12 +353,11 @@ const { instance } = require("../config/razorpay")
 const Course = require("../models/Course")
 const crypto = require("crypto")
 const User = require("../models/User")
-const mailSender = require("../utils/imageUploader")
+const sendMail = require("../utils/sendMail")
 const mongoose = require("mongoose")
-const {courseEnrollmentEmail} = require("../mail/templates/courseEnrollmentEmail")
+const { courseEnrollmentEmail } = require("../mail/templates/courseEnrollmentEmail")
 const { paymentSuccessEmail } = require("../mail/templates/paymentSuccessEmail")
 const CourseProgress = require("../models/CourseProgress")
-const sendMail = require("../utils/sendMail")
 
 // Capture the payment and initiate the Razorpay order
 exports.capturePayment = async (req, res) => {
@@ -409,7 +408,7 @@ exports.capturePayment = async (req, res) => {
     // Initiate the payment using Razorpay
     console.log("Gate way 1");
     const paymentResponse = await instance.orders.create(options)
-    console.log("Payment response : ",paymentResponse)
+    console.log("Payment response : ", paymentResponse)
     res.json({
       success: true,
       data: paymentResponse,
@@ -524,7 +523,7 @@ const enrollStudents = async (courses, userId, res) => {
         {
           $push: {
             courses: courseId,
-            userID : userId,
+            userID: userId,
             courseProgress: courseProgress._id,
           },
         },
