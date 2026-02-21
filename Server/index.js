@@ -7,34 +7,42 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-// ✅ CORS must be set up FIRST — before routes and DB connect
 const allowedOrigins = [
 	"https://medhavi-pro.vercel.app",
 	"http://localhost:3000",
 	"http://localhost:5173",
 ];
 
-if (process.env.FRONTEND_URL) {
-	allowedOrigins.push(process.env.FRONTEND_URL);
-}
-
 const corsOptions = {
 	origin: function (origin, callback) {
-		// Allow requests with no origin (mobile apps, curl, Postman)
+		// Allow requests with no origin (like mobile apps or curl)
 		if (!origin) return callback(null, true);
-		if (allowedOrigins.includes(origin)) {
-			return callback(null, true);
+
+		// Check if origin is in our allowed list
+		if (allowedOrigins.indexOf(origin) !== -1 || origin.includes("vercel.app")) {
+			callback(null, true);
+		} else {
+			console.log("CORS Blocked for origin:", origin);
+			callback(new Error("Not allowed by CORS"));
 		}
-		return callback(new Error("CORS not allowed for: " + origin), false);
 	},
+	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+	preflightContinue: false,
+	optionsSuccessStatus: 204,
 	credentials: true,
-	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-	allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
 };
 
-// Handle preflight OPTIONS requests for ALL routes
+// Apply CORS middleware
 app.use(cors(corsOptions));
+
+// Handle preflight for all routes
 app.options("*", cors(corsOptions));
+
+// Logging middleware for Render
+app.use((req, res, next) => {
+	console.log(`${req.method} ${req.path} - Origin: ${req.headers.origin}`);
+	next();
+});
 
 // Body parsers
 app.use(express.json());
